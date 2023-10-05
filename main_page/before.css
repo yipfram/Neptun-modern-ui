@@ -1,0 +1,38 @@
+.main_header_m{
+    display: none !important;
+}
+
+.main_header_l{
+    display: none !important;
+}
+
+.main_header_r{
+    display: none !important;
+}
+
+#panCloseHeader{
+    display: none !important;
+}
+
+.top_menu_wrapper{
+    margin-top: 2% !important;
+}
+
+#sideBarMenu{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: red;
+    min-width: 5%;
+    width: auto;
+    height: auto;
+    z-index: 9999;
+}
+
+.sideBarButton{
+    margin-top: 3%;
+    width: 4.6vh;
+    cursor: pointer;
+    height: auto;
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Neptun Modern UI",
+  "description": "A simple extension to modernise the old Neptune scholarship manager web app.",
+  "homepage_url": "https://romain-rochas.fr",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Neptun Modern UI",
+    "default_popup": "popup/popup.html"
+  },
+  "author": "yipfram",
+  "content_scripts": [
+    {
+      "run_at" : "document_start",
+      "css" : ["./main_page/before.min.css"],
+      "matches" : [
+        "https://neptun-web3.tr.pte.hu/hallgato/main.aspx*"
+      ]
+    },
+    {
+      "run_at" : "document_end",
+      "js" : ["./main_page/before.min.js"],
+      "css" : ["./main_page/before.min.css"],
+      "matches" : [
+        "https://neptun-web3.tr.pte.hu/hallgato/main.aspx*"
+      ]
+    },
+    {
+      "run_at" : "document_idle",
+      "css" : ["./main_page/main.min.css"],
+      "js": ["./main_page/main.min.js"],
+      "matches": [
+        "https://neptun-web3.tr.pte.hu/hallgato/main.aspx*"
+      ]
+    },
+    {
+      "run_at" : "document_end",
+      "js": ["login/login.min.js", "./login/CSN.user.min.js"],
+      "css": ["login/login.min.css"],
+      "matches": [
+        "https://neptun-web3.tr.pte.hu/hallgato/login.aspx*",
+        "https://neptun-web3.tr.pte.hu/hallgato/Login.aspx*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs","scripting","storage"
+  ],
+  "host_permissions": [
+    "https://neptun-web3.tr.pte.hu/*",
+    "https://neptun-web3.tr.pte.hu/*"
+  ],
+  "web_accessible_resources": [{
+    "resources": ["assets/pte-logo-large.svg", "assets/main_logo.png", "assets/menu.svg", "assets/neptun_simple_logo.jpg"],
+    "matches": ["https://neptun-web3.tr.pte.hu/*"]
+  }]
+}
