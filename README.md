@@ -1,9 +1,9 @@
-# Fresh Chrome Extension boilerplate (Manifest V3)
+# Neptun Modern UI
 
-## Purpose
+## Goal
 
-This extension can be used as a boilerplate for creating new extensions for Chrome based browsers, like Google Chrome.
+Since neptun's UI is horrible, let's change it... 
 
-## What it does
+## My processes
 
-When installed it will write something to DevTools console (F12) at the three most common events: before page load, after page load and when the user clicks the extension button on browser top bar.
+I really changed by hand all the DOM, this is not clean but it works ;)
