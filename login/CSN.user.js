@@ -60,13 +60,14 @@ async function getCurrentTab() {
 
 (function () {
     'use strict';
-
+    const language = document.getElementsByTagName('html')[0].getAttribute('lang');
     const CALIBRATION_REQUIRED_ERROR = "CALIBRATION_REQUIRED"
     const AUDIO_LINK_NOT_FOUND_ERROR = "AUDIO_LINK_NOT_FOUND"
-    const CALIBRATOR_VALUE_KEY = "CSN_CALIBRATOR_VALUE"
+    const CALIBRATOR_VALUE_KEY = "CSN_CALIBRATOR_VALUE_" + language.toUpperCase();
+    chrome.storage.sync.get(null, function (data) { console.log(data) });
+
     let BASE_NUMBERPRINTS;
     let CALIBRATOR = 1.0;
-    const language = document.getElementsByTagName('html')[0].getAttribute('lang');
     if(language == "hu"){
         BASE_NUMBERPRINTS = [260587, 137703, 144640, 74290, 107363, 99141, 35806, 64888, 268335, 123680];
         console.log("language : "+ language)
