@@ -12,6 +12,20 @@
   "content_scripts": [
     {
       "run_at" : "document_start",
+      "js" : ["./assets/jquery-3.7.1.min.js"],
+      "matches" : [
+        "https://neptun-web3.tr.pte.hu/*"
+      ]
+    },
+    {
+      "run_at" : "document_start",
+      "js" : ["./background/back.min.js"],
+      "matches" : [
+        "https://neptun-web3.tr.pte.hu/hallgato/main.aspx*"
+      ]
+    },
+    {
+      "run_at" : "document_start",
       "css" : ["./main_page/before.min.css"],
       "matches" : [
         "https://neptun-web3.tr.pte.hu/hallgato/main.aspx*"
