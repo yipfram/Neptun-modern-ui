@@ -42,21 +42,7 @@ SOFTWARE.*/
 // @supportURL   https://github.com/LetsUpdate/CSN
 // @contributionURL https://github.com/LetsUpdate/CSN
 
-// ==/UserScript==
-function autoSubmit(){
-    const userInput = document.querySelector('#user');
-    const psswrdInput = document.querySelector('#pwd')
-    if (userInput.length != 0 && psswrdInput.length != 0) {
-        docheck()
-    }
-}
 
-async function getCurrentTab() {
-    let queryOptions = { active: true, lastFocusedWindow: true };
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
-    let [tab] = await chrome.tabs.query(queryOptions);
-    return tab;
-  }
 
 (function () {
     'use strict';
@@ -65,6 +51,7 @@ async function getCurrentTab() {
     const AUDIO_LINK_NOT_FOUND_ERROR = "AUDIO_LINK_NOT_FOUND"
     const CALIBRATOR_VALUE_KEY = "CSN_CALIBRATOR_VALUE_" + language.toUpperCase();
     chrome.storage.sync.get(null, function (data) { console.log(data) });
+    
 
     let BASE_NUMBERPRINTS;
     let CALIBRATOR = 1.0;
@@ -225,12 +212,32 @@ async function getCurrentTab() {
     function CalibrationNeeded() {
         //Alert the user that interaction needed for the script
         console.log(CALIBRATION_REQUIRED_ERROR + ' TEST');
-        chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY": ""}).then(() => {
-            if (chrome.runtime.lastError){
-                console.log('Error setting');
-            }
-            console.info("CALIBRATOR_VALUE_KEY value reseted")
-        })
+        if (language == "hu") {
+            chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_HU": ""}).then(() => {
+                if (chrome.runtime.lastError){
+                    console.log('Error setting');
+                }
+                console.info("CALIBRATOR_VALUE_KEY value reseted")
+            })
+        }
+        if (language == "en") {
+            chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_EN": ""}).then(() => {
+                if (chrome.runtime.lastError){
+                    console.log('Error setting');
+                }
+                console.info("CALIBRATOR_VALUE_KEY value reseted")
+            })
+        }
+        if(language == "de") {
+            chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_DE": ""}).then(() => {
+                if (chrome.runtime.lastError){
+                    console.log('Error setting');
+                }
+                console.info("CALIBRATOR_VALUE_KEY value reseted")
+            })
+        }
+        console.log("FOOAFJAIOJFAIOEJFIOJAEOIFJAOIFJAEOIFJOj")
+        chrome.storage.sync.get(null, function (data) { console.log(data) });
 
         if (document.getElementById("CalibrateButton")) return;
 
@@ -310,13 +317,31 @@ async function getCurrentTab() {
             alert("Something is not right");
         }
         if (isSuccess) {
-            
-            chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY": CALIBRATOR}).then(() => {
-                if (chrome.runtime.lastError){
-                    console.log('Error setting');
-                }
-                console.info("value is set " + CALIBRATOR)
-            })
+            if (language == "hu"){
+                chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_HU": CALIBRATOR}).then(() => {
+                    if (chrome.runtime.lastError){  
+                        console.log('Error setting');
+                    }
+                    console.info("value is set " + CALIBRATOR)
+                })
+            }
+            if (language == "en"){
+                chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_EN": CALIBRATOR}).then(() => {
+                    if (chrome.runtime.lastError){  
+                        console.log('Error setting');
+                    }
+                    console.info("value is set " + CALIBRATOR)
+                })
+            }
+            if (language == "de"){
+                chrome.storage.sync.set({"CALIBRATOR_VALUE_KEY_DE": CALIBRATOR}).then(() => {
+                    if (chrome.runtime.lastError){  
+                        console.log('Error setting');
+                    }
+                    console.info("value is set " + CALIBRATOR)
+                })
+            }
+           
             // GM.setValue(CALIBRATOR_VALUE_KEY, CALIBRATOR);
             const cbutton = document.getElementById("CalibrateButton");
             if (cbutton) cbutton.remove();
@@ -372,14 +397,36 @@ async function getCurrentTab() {
         CreateLogo();
 
         // Fetch the calibrator float number in the memory
-        CALIBRATOR= await chrome.storage.sync.get(["CALIBRATOR_VALUE_KEY"]).then((result) => {
-            if (chrome.runtime.lastError || result.CALIBRATOR_VALUE_KEY === undefined  || result.CALIBRATOR_VALUE_KEY === ""){
-                console.log('Error Getting stored value');
-                return 1
-            }
-            // console.log("Value currently is " + result.CALIBRATOR_VALUE_KEY);
-            return result.CALIBRATOR_VALUE_KEY;
-        });
+        if (language === "hu"){
+            CALIBRATOR= await chrome.storage.sync.get(["CALIBRATOR_VALUE_KEY_HU"]).then((result) => {
+                if (chrome.runtime.lastError || result.CALIBRATOR_VALUE_KEY_HU === undefined  || result.CALIBRATOR_VALUE_KEY_HU === ""){
+                    console.log('Error Getting stored value');
+                    return 1
+                }
+                // console.log("Value currently is " + result.CALIBRATOR_VALUE_KEY);
+                return result.CALIBRATOR_VALUE_KEY_HU;
+            });
+        }
+        if (language === "en"){
+            CALIBRATOR= await chrome.storage.sync.get(["CALIBRATOR_VALUE_KEY_EN"]).then((result) => {
+                if (chrome.runtime.lastError || result.CALIBRATOR_VALUE_KEY_EN === undefined  || result.CALIBRATOR_VALUE_KEY_EN === ""){
+                    console.log('Error Getting stored value');
+                    return 1
+                }
+                // console.log("Value currently is " + result.CALIBRATOR_VALUE_KEY);
+                return result.CALIBRATOR_VALUE_KEY_EN;
+            });
+        }
+        if (language === "de"){
+            CALIBRATOR= await chrome.storage.sync.get(["CALIBRATOR_VALUE_KEY_DE"]).then((result) => {
+                if (chrome.runtime.lastError || result.CALIBRATOR_VALUE_KEY_DE === undefined  || result.CALIBRATOR_VALUE_KEY_DE === ""){
+                    console.log('Error Getting stored value');
+                    return 1
+                }
+                // console.log("Value currently is " + result.CALIBRATOR_VALUE_KEY);
+                return result.CALIBRATOR_VALUE_KEY_DE;
+            });
+        }
 
         // CALIBRATOR = await GM.getValue(CALIBRATOR_VALUE_KEY, 1);
         // Tampermonkey's way to save a variable in the memory.
