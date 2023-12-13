@@ -1,15 +1,21 @@
 const uptraining = $('#upTraining')
 
 function changeLanguageFlagLocation(){
-    let uptraining = document.querySelector('#upTraining').outerHTML;
-    let languageDiv = document.getElementById('divLang').outerHTML;
+    let uptraining = $('<div>').append($('#upTraining').clone()).html();
+    let languageDiv = $('<div>').append($('#divLang').clone()).html();
+    let logoutButton = $('<div>').append($('#lbtnQuit').clone()).html();
+    console.log(languageDiv);
+    $("#mainPageHeader div").last().remove();
 
     languageDiv = languageDiv.replace('langchooserimgcollapsed','langchooserimgexpanded')
     languageDiv = languageDiv.replace('divlang', 'divlangTop')
-    languageDiv += uptraining;
-    changeInner(".top_logout", languageDiv);
+    $("#upTraining").remove();
+    $(".top_logout_link").remove();
+    fullDiv = uptraining + languageDiv + logoutButton ;
+    $('.top_logout').append(fullDiv);
 
-    document.querySelector('.langchooser').remove()
+
+    $('.langchooser').remove()
 }
 
 function changeHeader() {
